@@ -1,0 +1,12 @@
+.cpcache
+.nrepl-port
+.lein-repl-history
+*.class
+*.jar
+target/
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
