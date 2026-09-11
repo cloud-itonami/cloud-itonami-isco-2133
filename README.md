@@ -49,7 +49,7 @@ All proposals carry:
 ## Testing
 
 ```bash
-clj -M:test
+kbb -M:test
 ```
 
 Deterministic mock advisor (`:mock-advisor`, default) or real LLM-backed (`llm-advisor`).
