@@ -1,0 +1,33 @@
+;; What this vertical's robot physically does, declared for
+;; kotoba.robotics.process (kotoba-lang/robotics). `kbb -M:physics` runs it.
+;;
+;; README: a field and laboratory environmental assessment support actor for
+;; environmental monitoring and contamination assessment (ISCO 2133),
+;; proposing monitoring-equipment allocation at registered monitoring sites.
+;; The physical field work: low-flow groundwater sampling with a surface
+;; peristaltic pump (suction lift), and lifting filled sample coolers onto the
+;; field vehicle.
+;;
+;; Every number without a cited source is marked `estimate` in its :basis.
+;; Replacing an estimate with a sourced value is this bot's growth work.
+{:physics/schema "itonami.physical-ai.spec.v1"
+ :repo "cloud-itonami/cloud-itonami-isco-2133"
+ :cases
+ [{:id :low-flow-groundwater-sampling
+   :kind :pipe-flow
+   :procedure "surface peristaltic pump draws groundwater at 0.3 L/min up 30 m of 6.35 mm bore polyethylene tubing from the monitoring well"
+   :params {:q-m3s 5.0e-6 :diameter-m 0.00635 :length-m 30.0 :roughness-m 1.5e-6
+            :density-kg-m3 999.0 :viscosity-pa-s 1.3e-3 :pump-efficiency 0.3}
+   :sweep {:param :elevation-m :values [2.0 4.0 6.0 8.0 10.0]}
+   :quantity :head-m
+   :limit {:max 8.0 :basis "estimate: practical suction lift of a surface peristaltic pump, below the ~10.3 m of water that atmospheric pressure can support"}
+   :boundary {:lo 0.0 :hi 12.0}}
+  {:id :sample-cooler-to-vehicle
+   :kind :manipulator
+   :procedure "arm lifts a filled sample cooler from the ground onto the field vehicle's tailgate"
+   :params {:l1-m 0.60 :l2-m 0.55 :m1-kg 8.0 :m2-kg 6.0
+            :from [0.70 -0.30] :to [0.60 0.45] :duration-s 3.0 :steps 500}
+   :sweep {:param :payload-kg :values [4.0 8.0 12.0 16.0 20.0]}
+   :quantity :peak-tau1-nm
+   :limit {:max 200.0 :basis "estimate: continuous shoulder torque of a 15-20 kg payload class industrial arm"}
+   :boundary {:lo 1.0 :hi 60.0}}]}
