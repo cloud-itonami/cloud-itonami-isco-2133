@@ -1,6 +1,6 @@
 (ns envpro.actor
   "EnvironmentalActor — the ISCO-08 2133 environmental protection actor as a
-  `langgraph.graph/state-graph` (per ADR-2607011000 / CLAUDE.md
+  `langgraph.graph/state-graph` (per ADR-2607011000 / AGENTS.md
   Actors section). One graph run = one environmental operation request
   (intake → advise → govern → decide → commit/hold, with a
   human-approval interrupt for escalated proposals). No infinite
